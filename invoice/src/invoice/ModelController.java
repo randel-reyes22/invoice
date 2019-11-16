@@ -5,7 +5,9 @@
  */
 package invoice;
 
+import static java.lang.System.out;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,6 +41,7 @@ public class ModelController implements Initializable, compute {
     //button
     @FXML private Button btn_Add;
     @FXML private Button close;
+    @FXML private Button btn_Save;
     
     //text area
     @FXML private TextArea area;
@@ -53,6 +56,9 @@ public class ModelController implements Initializable, compute {
     customer c = new customer();
     date d = new date();
     items i = new items();
+    
+    //Arraylists
+    private ArrayList<items> AlItems = new ArrayList<>(); 
     
     @Override
     public void initialize(URL url, ResourceBundle rep) {
@@ -94,7 +100,7 @@ public class ModelController implements Initializable, compute {
         item_count.setText(String.valueOf(count_item(i.getQty())));
         total_render_amount.setText(String.valueOf(computeTotalAmount(i.getMainTotalAmount())));
         customer_signature.setText(c.getCustomer_name());
-        
+         
         //append to the text area
         area.appendText(i.getItem_name());
         area.appendText("       ");
@@ -108,7 +114,10 @@ public class ModelController implements Initializable, compute {
         area.appendText("       ");
         area.appendText(String.valueOf(i.getTotal_amount()));
         area.appendText("\n");  
-
+        
+        //add the items to the arraylist 
+        //for printing
+        AlItems.add(new items(i.getItem_name(), i.getQty(), i.getPrice(), i.getUndiscountedAmount(), i.getDiscount(), i.getTotal_amount()));
     }
        
     //close the scene
@@ -117,6 +126,17 @@ public class ModelController implements Initializable, compute {
     {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
+    }
+    
+    //prints the list of the items
+    @FXML
+    public void print(ActionEvent event)
+    {
+        for(items obj_items: AlItems)
+        { 
+            out.print(obj_items.getItem_name() + "   " + obj_items.getQty() + "   " + obj_items.getPrice() + "   " + obj_items.getUndiscountedAmount());
+            out.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
+        }
     }
     
     //belongs to the compute interface
@@ -146,6 +166,8 @@ public class ModelController implements Initializable, compute {
         ctr = ctr +  item;
         return ctr;
     }
+    
+    
 
         
 }

@@ -11,33 +11,33 @@
 <AnchorPane id="AnchorPane" prefHeight="901.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoice.ModelController">
     <children>
       <Label layoutX="527.0" layoutY="728.0" prefHeight="67.0" prefWidth="461.0" text="I hereby certify that I have received the above mentioned goods in good ordder and condtion. I agree to my obligation on or before dude date (30 days after the date of purchase)." wrapText="true" />
-        <TextField fx:id="description" layoutX="127.0" layoutY="260.0" promptText="Description">
+        <TextField fx:id="description" layoutX="127.0" layoutY="259.0" promptText="Description">
          <font>
             <Font size="18.0" />
          </font></TextField>
-        <TextField fx:id="price" layoutX="127.0" layoutY="324.0" promptText="Price">
+        <TextField fx:id="price" layoutX="127.0" layoutY="333.0" promptText="Price">
          <font>
             <Font size="18.0" />
          </font></TextField>
-        <TextField fx:id="qty" layoutX="127.0" layoutY="387.0" promptText="Quantity">
+        <TextField fx:id="qty" layoutX="127.0" layoutY="420.0" promptText="Quantity">
          <font>
             <Font size="18.0" />
          </font></TextField>
-        <Button fx:id="btn_Add" layoutX="167.0" layoutY="520.0" mnemonicParsing="false" onAction="#AddItem" text="ADD ITEM">
+        <Button fx:id="btn_Add" layoutX="164.0" layoutY="572.0" mnemonicParsing="false" onAction="#AddItem" text="ADD ITEM">
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
-        <Button fx:id="close" layoutX="254.0" layoutY="35.0" mnemonicParsing="false" onAction="#closeWindow" text="CLOSE">
+        <Button fx:id="close" layoutX="253.0" layoutY="48.0" mnemonicParsing="false" onAction="#closeWindow" text="CLOSE">
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
-        <Button layoutX="120.0" layoutY="35.0" mnemonicParsing="false" text="SAVE">
+        <Button fx:id="btn_Save" layoutX="119.0" layoutY="48.0" mnemonicParsing="false" onAction="#print" text="SAVE">
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
         <TextField fx:id="po_date" editable="false" layoutX="871.0" layoutY="61.0" promptText="po date" />
         <Label layoutX="804.0" layoutY="66.0" text="P.o. Date:" />
-      <TextArea fx:id="area" layoutX="514.0" layoutY="159.0" prefHeight="522.0" prefWidth="506.0" promptText="Receipt">
+      <TextArea fx:id="area" editable="false" layoutX="514.0" layoutY="159.0" prefHeight="522.0" prefWidth="506.0" promptText="Receipt">
          <font>
             <Font name="Consolas" size="14.0" />
          </font>
@@ -74,7 +74,7 @@
             <Font name="Impact" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="discount_textField" layoutX="127.0" layoutY="451.0" promptText="Discount ">
+      <TextField fx:id="discount_textField" layoutX="127.0" layoutY="498.0" promptText="Discount ">
          <font>
             <Font size="18.0" />
          </font>
@@ -85,5 +85,25 @@
       <Label layoutX="758.0" layoutY="134.0" text="Total" />
       <Label layoutX="832.0" layoutY="134.0" text="Discount" />
       <Label layoutX="932.0" layoutY="134.0" text="Total" />
+      <Label layoutX="127.0" layoutY="242.0" text="Description">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="127.0" layoutY="316.0" text="Price">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="127.0" layoutY="403.0" text="Quantity">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="127.0" layoutY="481.0" text="Discount">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

@@ -21,10 +21,17 @@ public class items {
     private double undiscountedAmount = 0.0;
     private double mainTotalAmount = 0.00;
     
-
-    
-    
     public items(){};
+    
+    public items(String item_name, int qty, double price, double undiscountedAmount, int discount, double mainTotalAmount ) {
+        super();
+        this.item_name = item_name;
+        this.qty = qty; 
+        this.price = price;
+        this.discount = discount;
+        this.undiscountedAmount = undiscountedAmount;
+        this.mainTotalAmount = mainTotalAmount;
+    }
     
     public items(String item_name, int qty, double price, double total) {
         super();
@@ -89,7 +96,5 @@ public class items {
     public void setUndiscountedAmount(double undiscountedAmount) {
         this.undiscountedAmount = undiscountedAmount;
     }
-
-   
-    
+ 
 }
