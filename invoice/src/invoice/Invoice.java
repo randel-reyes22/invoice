@@ -24,7 +24,7 @@ public class Invoice extends Application{
     {
         try{
             Parent root = FXMLLoader.load(getClass().getResource("Model.fxml"));
-            Scene scene = new Scene(root,1124,856);
+            Scene scene = new Scene(root,1032,805);
             primaryStage.setScene(scene);
             primaryStage.show();
         }

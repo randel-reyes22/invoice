@@ -13,10 +13,19 @@ package invoice;
  */
 public class items {
     
-    private String item_name;
+    private String item_name =" ";
     private int qty = 1;
     private double price;
-    private double total_amount;
+    private double total_amount = 0.0;
+    private double mainTotalAmount;
+
+    public double getMainTotalAmount() {
+        return mainTotalAmount;
+    }
+
+    public void setMainTotalAmount(double mainTotalAmount) {
+        this.mainTotalAmount = mainTotalAmount;
+    }
     
     public items(){};
     

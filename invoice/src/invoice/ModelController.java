@@ -7,16 +7,12 @@ package invoice;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
@@ -24,69 +20,94 @@ import javafx.stage.Stage;
  *
  * @author Randel Reyes
  */
-public class ModelController implements Initializable {
+public class ModelController implements Initializable, compute {
 
     //textfields
     @FXML private TextField description; 
     @FXML private TextField price;
     @FXML private TextField qty;
     @FXML private TextField po_date;
+    @FXML private TextField item_count;
+    @FXML private TextField total_render_amount;
     
     //button
     @FXML private Button btn_Add;
     @FXML private Button close;
     
-    //table
-    @FXML private TableView<items> table;
-    @FXML private TableColumn<items, String> descriptioncol;
-    @FXML private TableColumn<items, Integer> quantitycol;
-    @FXML private TableColumn<items, Double> pricecol;
-    @FXML private TableColumn<items, Double> undiscounted_total;
+    //text area
+    @FXML private TextArea area;
     
     //instance
     private double total;
+    private int ctr = 0; 
+    private double TotalAmount;
     
     //clasess
     customer c = new customer();
     date d = new date();
+    items i = new items();
     
     @Override
     public void initialize(URL url, ResourceBundle rep) {
-        descriptioncol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        quantitycol.setCellValueFactory(new PropertyValueFactory<>("qty"));
-        pricecol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        undiscounted_total.setCellValueFactory(new PropertyValueFactory<>("undiscounted_total"));
-        table.setItems(getItemList());
+       
     }   
-    
+   
+    @FXML
+    public void AddItem(ActionEvent event)
+    {  
+        i.setItem_name(description.getText()); //item name
+        i.setQty(Integer.valueOf(qty.getText())); // quantity
+        i.setPrice(Double.valueOf(price.getText())); // price
+        i.setTotal_amount(computePrice(i.getPrice(),  i.getQty())); //item total price
+        i.setMainTotalAmount(i.getTotal_amount());//get the main total amount; tendered amount
+        
+        //clears the textfields
+        description.clear();
+        qty.clear();
+        price.clear();
+        
+        //sets the purchase order date
+        po_date.setText(d.getDate());
+        
+        //append to the text area
+        area.appendText(i.getItem_name());
+        area.appendText("             ");
+        area.appendText(String.valueOf(i.getQty()));
+        area.appendText("             ");
+        area.appendText(String.valueOf(i.getPrice()));
+        area.appendText("             ");
+        area.appendText(String.valueOf(i.getTotal_amount()));
+        area.appendText("\n");
+        
+        
+        item_count.setText(String.valueOf(count_item(i.getQty())));
+        total_render_amount.setText(String.valueOf(computeTotalAmount(i.getMainTotalAmount())));
+    }
+       
     @FXML
     public void closeWindow(ActionEvent event)
     {
         Stage stage = (Stage) close.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 
-    @FXML
-    public void AddItem(ActionEvent event)
-    {  
-        items i = new items();
-        i.setItem_name(description.getText());
-        i.setQty(Integer.valueOf(qty.getText()));
-        i.setPrice(Double.valueOf(price.getText()));
-        i.setTotal_amount(i.getPrice() * i.getQty());
-        table.getItems().add(i);     
+    @Override
+    public double computePrice(double price1, int qty1) {
         
-        po_date.setText(d.getDate());
+        return price1 * qty1;
+        
     }
-    
-    ObservableList<items> getItemList()
-    {
-        ObservableList<items> Items = FXCollections.observableArrayList();
-        Items.add(new items("Suka", 1, 300, 300));
-        Items.add(new items("Suka", 1, 200, 300));
-        return Items;
+
+    @Override
+    public double computeTotalAmount(double mainTotalAmount) {
+        TotalAmount = TotalAmount + mainTotalAmount;
+        return 0;
     }
-       
+
+    @Override
+    public int count_item(int item) {
+        ctr = ctr +  item;
+        return ctr;
+    }
     
 }
