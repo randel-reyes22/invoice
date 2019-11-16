@@ -120,18 +120,21 @@ public class ModelController implements Initializable, compute {
     }
     
     //belongs to the compute interface
-    //computes the item price
-    @Override
-    public double computePrice(double total, int discount) {
-        decimal = (float)(discount * 100) / 100;
-        System.out.println(decimal);
-        return (total * decimal) - total;
-    }
-    
+    //computes the undiscounted amount of the item
     @Override
     public double undiscountedAmount(double price1, int qty1) {
         return price1 * qty1;
     }
+    
+    //computes the item price
+    @Override
+    public double computePrice(double total, int discount) {
+        decimal = (discount * 0.01);
+        System.out.println(decimal);
+        return total - (total * decimal);
+    }
+    
+    
     
     //compute the total amount of all the items
     @Override
