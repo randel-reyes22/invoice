@@ -72,10 +72,6 @@ public class ModelController implements Initializable, compute {
     @FXML
     public void AddItem(ActionEvent event)
     {  
-        //customer class
-        c.setCustomer_name(customer_name.getText()); // set the customer name
-        c.setCustomer_address(customer_address.getText()); // set the customer address
-        
         //item class
         //d.setDuedate(due_date.getText());
         try{
@@ -98,6 +94,10 @@ public class ModelController implements Initializable, compute {
         qty.clear();
         price.clear();
         discount_textField.clear();
+        
+        //customer class
+        c.setCustomer_name(customer_name.getText()); // set the customer name
+        c.setCustomer_address(customer_address.getText()); // set the customer address
         
         //sets the content of the textfields
         po_date.setText(d.getDate());
@@ -142,8 +142,14 @@ public class ModelController implements Initializable, compute {
             out.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
         }
         
-        generateTheFile(); //generates the output file
-        generateOutput(); //prints the content to a text file
+        try{
+            generateTheFile(); //generates the output file
+            generateOutput(); //prints the content to a text file
+        }
+        
+        catch(IOException e){
+            out.println("EWWOW");
+        }
     }
     
     //belongs to the compute interface
@@ -174,14 +180,12 @@ public class ModelController implements Initializable, compute {
         return ctr;
     }
     
-    //concatonate the customer name, current dat, and the extension .txt
-    String fileName = c.getCustomer_name()+"-"+d.getDate()+".txt";
+    //concatonate the customer name, current date, and the extension .txt
+    String fileName = c.getCustomer_address() + "-" + d.getDate()+ ".txt";
 
     //will generate the file output
     public void generateTheFile() throws IOException
     {
-        out.println(c.getCustomer_name());
-        
         File dirFile = new File("d:\\Invoice List");
         if(!dirFile.exists())
             dirFile.mkdir();

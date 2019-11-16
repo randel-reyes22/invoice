@@ -17,6 +17,13 @@ import java.time.format.DateTimeFormatter;
 public class date {
     
     private String Duedate;
+
+    public date() {
+    }
+    
+    public date(String Duedate) {
+        this.Duedate = Duedate;
+    }
     
     //return the current date
     //this will serve as the purchase order date
