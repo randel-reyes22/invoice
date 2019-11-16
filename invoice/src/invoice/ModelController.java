@@ -41,6 +41,7 @@ public class ModelController implements Initializable, compute {
     @FXML private TextField customer_signature;
     @FXML private DatePicker due_date;
     @FXML private TextField discount_textField;
+    @FXML private TextField status_display;
     
     //button
     @FXML private Button btn_Add;
@@ -61,13 +62,17 @@ public class ModelController implements Initializable, compute {
     customer c = new customer();
     date d = new date();
     items i = new items();
+    private boolean start = true;
     
     //Arraylists
     private ArrayList<items> AlItems = new ArrayList<>(); 
     
     @Override
     public void initialize(URL url, ResourceBundle rep) {
-       
+       if(start)
+       {
+           status_display.setText("Receipt is running");
+       }
     }   
    
     @FXML
@@ -149,6 +154,16 @@ public class ModelController implements Initializable, compute {
         try{
             generateTheFile(); //generates the output file
             generateOutput(); //prints the content to a text file
+            status_display.setText("Text file is created");
+            AlItems.clear(); // clear arraylist
+            //clear text area and text fields
+            area.clear(); 
+            customer_name.clear();
+            customer_address.clear();
+            po_date.clear();
+            item_count.clear();
+            total_render_amount.clear();
+            customer_signature.clear();
         }
         
         catch(IOException e){
