@@ -13,19 +13,16 @@ package invoice;
  */
 public class items {
     
-    private String item_name =" ";
-    private int qty = 1;
-    private double price;
+    private String item_name = "";
+    private int qty;
+    private double price = 0.00;
+    private int discount = 0;
     private double total_amount = 0.00;
-    private double mainTotalAmount;
+    private double undiscountedAmount = 0.0;
+    private double mainTotalAmount = 0.00;
+    
 
-    public double getMainTotalAmount() {
-        return mainTotalAmount;
-    }
-
-    public void setMainTotalAmount(double mainTotalAmount) {
-        this.mainTotalAmount = mainTotalAmount;
-    }
+    
     
     public items(){};
     
@@ -35,6 +32,14 @@ public class items {
         this.qty = qty; 
         this.price = price;
         this.total_amount = total;
+    }
+    
+    public double getMainTotalAmount() {
+        return mainTotalAmount;
+    }
+
+    public void setMainTotalAmount(double mainTotalAmount) {
+        this.mainTotalAmount = mainTotalAmount;
     }
     
      public String getItem_name() {
@@ -67,6 +72,22 @@ public class items {
 
     public void setTotal_amount(double total_amount) {
         this.total_amount = total_amount;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public double getUndiscountedAmount() {
+        return undiscountedAmount;
+    }
+
+    public void setUndiscountedAmount(double undiscountedAmount) {
+        this.undiscountedAmount = undiscountedAmount;
     }
 
    

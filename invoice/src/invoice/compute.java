@@ -10,8 +10,9 @@ package invoice;
  * @author Randel Reyes
  */
 interface compute {
-    
-        public double computePrice(double price1, int qty1);
+        
+        public double undiscountedAmount(double price1, int qty1);
+        public double computePrice(double total, int discount);
         public double computeTotalAmount(double mainTotalAmount);
         public int count_item(int item);
 }

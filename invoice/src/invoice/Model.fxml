@@ -23,7 +23,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-        <Button fx:id="btn_Add" layoutX="169.0" layoutY="492.0" mnemonicParsing="false" onAction="#AddItem" text="ADD ITEM">
+        <Button fx:id="btn_Add" layoutX="167.0" layoutY="520.0" mnemonicParsing="false" onAction="#AddItem" text="ADD ITEM">
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
@@ -74,5 +74,10 @@
             <Font name="Impact" size="24.0" />
          </font>
       </Label>
+      <TextField fx:id="discount_textField" layoutX="127.0" layoutY="451.0" promptText="Discount ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
     </children>
 </AnchorPane>

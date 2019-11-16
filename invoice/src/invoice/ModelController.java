@@ -34,6 +34,7 @@ public class ModelController implements Initializable, compute {
     @FXML private TextField customer_name;
     @FXML private TextField customer_signature;
     @FXML private DatePicker due_date;
+    @FXML private TextField discount_textField;
     
     //button
     @FXML private Button btn_Add;
@@ -42,10 +43,11 @@ public class ModelController implements Initializable, compute {
     //text area
     @FXML private TextArea area;
     
-    //instance
+    //instance variables
     private double total;
     private int ctr = 0; 
     private double TotalAmount;
+    private double decimal;
     
     //clasess
     customer c = new customer();
@@ -70,18 +72,22 @@ public class ModelController implements Initializable, compute {
             i.setItem_name(description.getText()); //item name
             i.setQty(Integer.valueOf(qty.getText())); // quantity
             i.setPrice(Double.valueOf(price.getText())); // price
+            i.setDiscount(Integer.valueOf(discount_textField.getText()));
         }
         
         catch(NumberFormatException e){
             description.setText("Provide data");
         }
-        i.setTotal_amount(computePrice(i.getPrice(),  i.getQty())); //item total price
+        
+        i.setUndiscountedAmount(undiscountedAmount(i.getPrice(),  i.getQty())); // get the undisocounted amount
+        i.setTotal_amount(computePrice(i.getUndiscountedAmount(), i.getDiscount())); //item total price
         i.setMainTotalAmount(i.getTotal_amount());//get the main total amount; tendered amount
         
         //clears the textfields
         description.clear();
         qty.clear();
         price.clear();
+        discount_textField.clear();
         
         //sets the content of the textfields
         po_date.setText(d.getDate());
@@ -91,11 +97,15 @@ public class ModelController implements Initializable, compute {
         
         //append to the text area
         area.appendText(i.getItem_name());
-        area.appendText("             ");
+        area.appendText("       ");
         area.appendText(String.valueOf(i.getQty()));
-        area.appendText("             ");
+        area.appendText("       ");
         area.appendText(String.valueOf(i.getPrice()));
-        area.appendText("             ");
+        area.appendText("       ");
+        area.appendText(String.valueOf(i.getUndiscountedAmount()));
+        area.appendText("       ");
+        area.appendText(String.valueOf(i.getDiscount()));
+        area.appendText("       ");
         area.appendText(String.valueOf(i.getTotal_amount()));
         area.appendText("\n");  
 
@@ -108,10 +118,18 @@ public class ModelController implements Initializable, compute {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
     }
-
+    
+    //belongs to the compute interface
     //computes the item price
     @Override
-    public double computePrice(double price1, int qty1) {
+    public double computePrice(double total, int discount) {
+        decimal = (float)(discount * 100) / 100;
+        System.out.println(decimal);
+        return (total * decimal) - total;
+    }
+    
+    @Override
+    public double undiscountedAmount(double price1, int qty1) {
         return price1 * qty1;
     }
     
@@ -127,5 +145,6 @@ public class ModelController implements Initializable, compute {
         ctr = ctr +  item;
         return ctr;
     }
-    
+
+        
 }
