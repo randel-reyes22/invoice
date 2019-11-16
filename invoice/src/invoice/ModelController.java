@@ -55,6 +55,7 @@ public class ModelController implements Initializable, compute {
     private int ctr = 0; 
     private double TotalAmount;
     private double decimal;
+    String fileName;
     
     //clasess
     customer c = new customer();
@@ -98,6 +99,9 @@ public class ModelController implements Initializable, compute {
         //customer class
         c.setCustomer_name(customer_name.getText()); // set the customer name
         c.setCustomer_address(customer_address.getText()); // set the customer address
+        
+        //concatonate the customer name, current date, and the extension .txt
+        fileName = c.getCustomer_name() + "-" + d.getDate()+ ".txt";
         
         //sets the content of the textfields
         po_date.setText(d.getDate());
@@ -179,9 +183,6 @@ public class ModelController implements Initializable, compute {
         ctr = ctr +  item;
         return ctr;
     }
-    
-    //concatonate the customer name, current date, and the extension .txt
-    String fileName = c.getCustomer_address() + "-" + d.getDate()+ ".txt";
 
     //will generate the file output
     public void generateTheFile() throws IOException
