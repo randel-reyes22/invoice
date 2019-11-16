@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="846.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoice.ModelController">
+    <children>
+        <TextField fx:id="description" layoutX="95.0" layoutY="230.0" promptText="Description" />
+        <TextField fx:id="price" layoutX="95.0" layoutY="285.0" promptText="Price" />
+        <TextField fx:id="qty" layoutX="95.0" layoutY="333.0" promptText="Quantity" />
+        <Button fx:id="btn_Add" layoutX="227.0" layoutY="479.0" mnemonicParsing="false" onAction="#AddItem" text="ADD ITEM" />
+        <Button fx:id="close" layoutX="312.0" layoutY="136.0" mnemonicParsing="false" onAction="#closeWindow" text="CLOSE" />
+        <Button layoutX="210.0" layoutY="136.0" mnemonicParsing="false" text="SAVE" />
+        <TextField fx:id="po_date" layoutX="884.0" layoutY="83.0" />
+        <Label layoutX="817.0" layoutY="87.0" text="P.o. Date" />
+        <TableView fx:id="table" layoutX="509.0" layoutY="166.0" prefHeight="633.0" prefWidth="578.0">
+            <columns>
+                <TableColumn fx:id="descriptioncol" prefWidth="75.0" text="Description" />
+                <TableColumn fx:id="quantitycol" prefWidth="75.0" text="Quantity" />
+                <TableColumn fx:id="pricecol" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="undiscounted_total" prefWidth="75.0" text="Total" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</AnchorPane>
