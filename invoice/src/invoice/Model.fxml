@@ -58,7 +58,7 @@
             <Font name="Consolas" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="item_count" editable="false" layoutX="719.0" layoutY="693.0" prefHeight="25.0" prefWidth="35.0" promptText="qty" />
+      <TextField fx:id="item_count" editable="false" layoutX="719.0" layoutY="693.0" prefHeight="25.0" prefWidth="46.0" promptText="qty" />
       <Label layoutX="801.0" layoutY="697.0" text="Total amount:">
          <font>
             <Font name="Consolas" size="14.0" />
@@ -79,5 +79,11 @@
             <Font size="18.0" />
          </font>
       </TextField>
+      <Label layoutX="519.0" layoutY="134.0" text="Description" />
+      <Label layoutX="638.0" layoutY="134.0" text="Qty" />
+      <Label layoutX="686.0" layoutY="134.0" text="Price" />
+      <Label layoutX="758.0" layoutY="134.0" text="Total" />
+      <Label layoutX="832.0" layoutY="134.0" text="Discount" />
+      <Label layoutX="932.0" layoutY="134.0" text="Total" />
     </children>
 </AnchorPane>

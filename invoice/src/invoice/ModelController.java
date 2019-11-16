@@ -127,14 +127,12 @@ public class ModelController implements Initializable, compute {
     }
     
     //computes the item price
+    //this will converts the discount values to percentage
     @Override
     public double computePrice(double total, int discount) {
         decimal = (discount * 0.01);
-        System.out.println(decimal);
         return total - (total * decimal);
     }
-    
-    
     
     //compute the total amount of all the items
     @Override

@@ -8,11 +8,13 @@ package invoice;
 /**
  *
  * @author Randel Reyes
+ * @description: interface that will be implemented on model controller
  */
 interface compute {
-        
+    
         public double undiscountedAmount(double price1, int qty1);
         public double computePrice(double total, int discount);
         public double computeTotalAmount(double mainTotalAmount);
         public int count_item(int item);
+        
 }
