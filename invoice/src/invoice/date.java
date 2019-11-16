@@ -16,6 +16,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class date {
     
+    private String Duedate;
+    
     //return the current date
     //this will serve as the purchase order date
     public  String getDate()
@@ -31,6 +33,14 @@ public class date {
         LocalDateTime now = LocalDateTime.now();  
         
         return dtf.format(now);
+    }
+
+    public String getDuedate() {
+        return Duedate;
+    }
+
+    public void setDuedate(String Duedate) {
+        this.Duedate = Duedate;
     }
     
     

@@ -16,7 +16,7 @@ public class items {
     private String item_name =" ";
     private int qty = 1;
     private double price;
-    private double total_amount = 0.0;
+    private double total_amount = 0.00;
     private double mainTotalAmount;
 
     public double getMainTotalAmount() {

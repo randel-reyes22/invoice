@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -32,6 +33,7 @@ public class ModelController implements Initializable, compute {
     @FXML private TextField customer_address;
     @FXML private TextField customer_name;
     @FXML private TextField customer_signature;
+    @FXML private DatePicker due_date;
     
     //button
     @FXML private Button btn_Add;
@@ -63,9 +65,16 @@ public class ModelController implements Initializable, compute {
         c.setCustomer_address(customer_address.getText()); // set the customer address
         
         //item class
-        i.setItem_name(description.getText()); //item name
-        i.setQty(Integer.valueOf(qty.getText())); // quantity
-        i.setPrice(Double.valueOf(price.getText())); // price
+        //d.setDuedate(due_date.getText());
+        try{
+            i.setItem_name(description.getText()); //item name
+            i.setQty(Integer.valueOf(qty.getText())); // quantity
+            i.setPrice(Double.valueOf(price.getText())); // price
+        }
+        
+        catch(NumberFormatException e){
+            description.setText("Provide data");
+        }
         i.setTotal_amount(computePrice(i.getPrice(),  i.getQty())); //item total price
         i.setMainTotalAmount(i.getTotal_amount());//get the main total amount; tendered amount
         
