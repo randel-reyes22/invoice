@@ -100,8 +100,7 @@ public class ModelController implements Initializable, compute {
 
     @Override
     public double computeTotalAmount(double mainTotalAmount) {
-        TotalAmount = TotalAmount + mainTotalAmount;
-        return 0;
+        return TotalAmount = TotalAmount + mainTotalAmount;
     }
 
     @Override
