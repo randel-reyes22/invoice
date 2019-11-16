@@ -5,6 +5,10 @@
  */
 package invoice;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.net.URL;
 import java.util.ArrayList;
@@ -130,13 +134,16 @@ public class ModelController implements Initializable, compute {
     
     //prints the list of the items
     @FXML
-    public void print(ActionEvent event)
+    public void printToTextFile(ActionEvent event) throws IOException
     {
         for(items obj_items: AlItems)
         { 
             out.print(obj_items.getItem_name() + "   " + obj_items.getQty() + "   " + obj_items.getPrice() + "   " + obj_items.getUndiscountedAmount());
             out.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
         }
+        
+        generateTheFile();
+        generateOutput();
     }
     
     //belongs to the compute interface
@@ -167,7 +174,42 @@ public class ModelController implements Initializable, compute {
         return ctr;
     }
     
+    String fileName = d.getDate()+".txt";
+
+    //will generate the file output
+    public void generateTheFile() throws IOException
+    {
+        File dirFile = new File("d:\\Invoice List");
+        if(!dirFile.exists())
+            dirFile.mkdir();
+       
+        dirFile = new File(dirFile, fileName);
+        dirFile.createNewFile();
+        
+        out.println("- The file is processed");
+        out.println("- The output: " + dirFile.getAbsoluteFile());
+    }
     
+    public void generateOutput() throws IOException
+    {
+        String str_dir = "d:\\Invoice List\\" + fileName;
+        
+        try (PrintWriter printContent = new PrintWriter(new FileWriter(str_dir, true))) 
+        {
+            
+            for(items obj_items: AlItems)
+            { 
+                printContent.print(obj_items.getItem_name() + "   " + obj_items.getQty() + "   " + obj_items.getPrice() + "   " + obj_items.getUndiscountedAmount());
+                printContent.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
+            }
+            
+        }
+        
+        catch(IOException e)
+        {
+            out.println("Can't write to the directory created");
+        }
+    } 
 
         
 }

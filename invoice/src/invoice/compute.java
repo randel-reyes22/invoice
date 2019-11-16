@@ -12,9 +12,16 @@ package invoice;
  */
 interface compute {
     
-        public double undiscountedAmount(double price1, int qty1);
-        public double computePrice(double total, int discount);
-        public double computeTotalAmount(double mainTotalAmount);
-        public int count_item(int item);
+    //computes the undiscounted amount of the item
+    public double undiscountedAmount(double price1, int qty1);
+    
+    //computes the discounted amount of the item
+    public double computePrice(double total, int discount);
+    
+    //computes the total amount of all the items
+    public double computeTotalAmount(double mainTotalAmount);
+    
+    //counts the number of items bought
+    public int count_item(int item);
         
 }

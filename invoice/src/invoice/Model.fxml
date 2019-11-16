@@ -31,7 +31,7 @@
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
-        <Button fx:id="btn_Save" layoutX="119.0" layoutY="48.0" mnemonicParsing="false" onAction="#print" text="SAVE">
+        <Button fx:id="btn_Save" layoutX="119.0" layoutY="48.0" mnemonicParsing="false" onAction="#printToTextFile" text="SAVE">
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>

@@ -23,14 +23,14 @@ public class items {
     
     public items(){};
     
-    public items(String item_name, int qty, double price, double undiscountedAmount, int discount, double mainTotalAmount ) {
+    public items(String item_name, int qty, double price, double undiscountedAmount, int discount, double total_amount ) {
         super();
         this.item_name = item_name;
         this.qty = qty; 
         this.price = price;
         this.discount = discount;
         this.undiscountedAmount = undiscountedAmount;
-        this.mainTotalAmount = mainTotalAmount;
+        this.total_amount = total_amount;
     }
     
     public items(String item_name, int qty, double price, double total) {
