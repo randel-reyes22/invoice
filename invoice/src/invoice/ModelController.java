@@ -57,6 +57,7 @@ public class ModelController implements Initializable, compute {
     private double TotalAmount;
     private double decimal;
     String fileName;
+    private int increase = 1;
     
     //clasess
     customer c = new customer();
@@ -188,14 +189,23 @@ public class ModelController implements Initializable, compute {
     public void generateOutput() throws IOException
     {
         String str_dir = "d:\\Invoice List\\"+ fileName;
-        
+         
         try (PrintWriter printContent = new PrintWriter(new FileWriter(str_dir, true))) 
         {
+            printContent.println("Name: " + c.getCustomer_name() + "                   " + "P.O. Date: " + d.getDate());
+            printContent.println("Address: " + c.getCustomer_address() + "                   \n\n");
+            
             for(items obj_items: AlItems)
             { 
                 printContent.print(obj_items.getItem_name() + "   " + obj_items.getQty() + "   " + obj_items.getPrice() + "   " + obj_items.getUndiscountedAmount());
                 printContent.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
             }
+            
+            printContent.println("\n                   " + "Qty: " + i.getQty() + "    " + i.getMainTotalAmount());
+            printContent.println("\nI hereby certify that I have received the above mentioned goods in good order and\n"
+                    + "condtion. I agree to my obligation on or \nbefore due date (30 days after the date of purchase).");
+            
+            printContent.println("\n                 " + "(Name and signature of the customer)" + c.getCustomer_name());
         }
         
         catch(IOException e)
