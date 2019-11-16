@@ -29,7 +29,7 @@ public class date {
     //this will serve as the purchase order date
     public String setDate()
     {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
         LocalDateTime now = LocalDateTime.now();  
         
         return dtf.format(now);

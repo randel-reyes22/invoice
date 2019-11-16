@@ -17,7 +17,7 @@ public class customer {
     private String customer_address;
 
     public String getCustomer_name() {
-        return customer_name;
+        return this.customer_name;
     }
 
     public void setCustomer_name(String customer_name) {
@@ -25,7 +25,7 @@ public class customer {
     }
 
     public String getCustomer_address() {
-        return customer_address;
+        return this.customer_address;
     }
 
     public void setCustomer_address(String customer_address) {

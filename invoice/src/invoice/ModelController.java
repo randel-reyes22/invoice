@@ -142,8 +142,8 @@ public class ModelController implements Initializable, compute {
             out.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
         }
         
-        generateTheFile();
-        generateOutput();
+        generateTheFile(); //generates the output file
+        generateOutput(); //prints the content to a text file
     }
     
     //belongs to the compute interface
@@ -174,11 +174,14 @@ public class ModelController implements Initializable, compute {
         return ctr;
     }
     
-    String fileName = d.getDate()+".txt";
+    //concatonate the customer name, current dat, and the extension .txt
+    String fileName = c.getCustomer_name()+"-"+d.getDate()+".txt";
 
     //will generate the file output
     public void generateTheFile() throws IOException
     {
+        out.println(c.getCustomer_name());
+        
         File dirFile = new File("d:\\Invoice List");
         if(!dirFile.exists())
             dirFile.mkdir();
@@ -192,17 +195,15 @@ public class ModelController implements Initializable, compute {
     
     public void generateOutput() throws IOException
     {
-        String str_dir = "d:\\Invoice List\\" + fileName;
+        String str_dir = "d:\\Invoice List\\"+ fileName;
         
         try (PrintWriter printContent = new PrintWriter(new FileWriter(str_dir, true))) 
         {
-            
             for(items obj_items: AlItems)
             { 
                 printContent.print(obj_items.getItem_name() + "   " + obj_items.getQty() + "   " + obj_items.getPrice() + "   " + obj_items.getUndiscountedAmount());
                 printContent.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
             }
-            
         }
         
         catch(IOException e)
