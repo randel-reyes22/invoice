@@ -41,7 +41,7 @@ public class ModelController implements Initializable, compute {
     @FXML private TextField customer_signature;
     @FXML private DatePicker due_date;
     @FXML private TextField discount_textField;
-    @FXML private TextField status_display;
+    @FXML private TextArea status_display;
     
     //button
     @FXML private Button btn_Add;

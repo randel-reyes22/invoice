@@ -27,11 +27,11 @@
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
-        <Button fx:id="close" layoutX="253.0" layoutY="129.0" mnemonicParsing="false" onAction="#closeWindow" text="CLOSE">
+        <Button fx:id="close" layoutX="245.0" layoutY="159.0" mnemonicParsing="false" onAction="#closeWindow" text="CLOSE">
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
-        <Button fx:id="btn_Save" layoutX="119.0" layoutY="129.0" mnemonicParsing="false" onAction="#printToTextFile" text="SAVE">
+        <Button fx:id="btn_Save" layoutX="111.0" layoutY="159.0" mnemonicParsing="false" onAction="#printToTextFile" text="SAVE">
          <font>
             <Font name="Impact" size="30.0" />
          </font></Button>
@@ -105,15 +105,15 @@
             <Font name="Consolas" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="status_display" editable="false" layoutX="63.0" layoutY="64.0" prefHeight="29.0" prefWidth="345.0" promptText="staus...">
-         <font>
-            <Font name="Consolas" size="14.0" />
-         </font>
-      </TextField>
-      <Label layoutX="64.0" layoutY="43.0" text="Status">
+      <Label layoutX="115.0" layoutY="33.0" text="Status">
          <font>
             <Font name="Consolas" size="14.0" />
          </font>
       </Label>
+      <TextArea fx:id="status_display" layoutX="117.0" layoutY="50.0" prefHeight="67.0" prefWidth="247.0" wrapText="true">
+         <font>
+            <Font name="Consolas" size="13.0" />
+         </font>
+      </TextArea>
     </children>
 </AnchorPane>
