@@ -192,20 +192,23 @@ public class ModelController implements Initializable, compute {
          
         try (PrintWriter printContent = new PrintWriter(new FileWriter(str_dir, true))) 
         {
-            printContent.println("Name: " + c.getCustomer_name() + "                   " + "P.O. Date: " + d.getDate());
-            printContent.println("Address: " + c.getCustomer_address() + "                   \n\n");
+            printContent.println("Name: " + c.getCustomer_name() + "\t\t\t" + "P.O. Date: " + d.getDate());
+            printContent.println("Address: " + c.getCustomer_address() + "\t\t\n\n");
+            
+            printContent.println("Description" + "\t\t" + "Qty" + "\t\t" + "Price" + "\t\t" + "Total" + "\t\t" + "Discount" + "\t\t" + "Total" + "\n");
             
             for(items obj_items: AlItems)
             { 
-                printContent.print(obj_items.getItem_name() + "   " + obj_items.getQty() + "   " + obj_items.getPrice() + "   " + obj_items.getUndiscountedAmount());
-                printContent.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
+                printContent.print(obj_items.getItem_name() + "\t\t\t" + obj_items.getQty() + "\t\t" + obj_items.getPrice() + "\t\t" + obj_items.getUndiscountedAmount());
+                printContent.println( "\t\t" + obj_items.getDiscount() + "\t\t" + obj_items.getTotal_amount());
             }
             
-            printContent.println("\n                   " + "Qty: " + i.getQty() + "    " + i.getMainTotalAmount());
-            printContent.println("\nI hereby certify that I have received the above mentioned goods in good order and\n"
-                    + "condtion. I agree to my obligation on or \nbefore due date (30 days after the date of purchase).");
+            printContent.println("\n\n" + "\t\t\t\t\t\t\t\t\t" + "Qty: " + i.getQty() + "    " + i.getMainTotalAmount());
+            printContent.println("\n" + "I hereby certify that I have received the above mentioned"+  "\n" + "goods in good order an"
+                    + "condtion I agree to my obligation on or \nbefore due date (30 days after the date of purchase).");
             
-            printContent.println("\n                 " + "(Name and signature of the customer)" + c.getCustomer_name());
+            printContent.println("\t\t" + c.getCustomer_name());
+            printContent.println("\t\t(Name & Signature Over Printed Name)");
         }
         
         catch(IOException e)
