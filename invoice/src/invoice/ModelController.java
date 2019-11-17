@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -84,7 +85,9 @@ public class ModelController implements Initializable, compute {
     public void AddItem(ActionEvent event)
     {  
         //item class
-        //d.setDuedate(due_date.getText());
+        LocalDate value = due_date.getValue();
+        d.setDuedate(String.valueOf(value));
+        
         try{
             i.setItem_name(description.getText()); //item name
             i.setQty(Integer.valueOf(qty.getText())); // quantity
@@ -150,9 +153,11 @@ public class ModelController implements Initializable, compute {
     @FXML
     public void printToTextFile(ActionEvent event) throws IOException
     {
-
-        if(c.getCustomer_name() != null)
+        
+        if(c.getCustomer_name() != null) //if customer name is not empty or null
         {
+            due_date.setValue(null);//resets the date picker
+            
             try{
                 generateTheFile(); //generates the output file
                 generateOutput(); //prints the content to a text file
@@ -185,6 +190,7 @@ public class ModelController implements Initializable, compute {
     public void generateTheFile() throws IOException
     {
         File dirFile = new File("d:\\Invoice List");
+        
         if(!dirFile.exists())
             dirFile.mkdir();
         
@@ -196,7 +202,7 @@ public class ModelController implements Initializable, compute {
         catch(IOException e)
         {
             status_display.clear();
-            status_display.setText("Please input the name of the customer");
+            status_display.setText("Unable to create the text file");
         }
         
         out.println("- The file is processed");
@@ -212,21 +218,21 @@ public class ModelController implements Initializable, compute {
             try (PrintWriter printContent = new PrintWriter(new FileWriter(str_dir, true))) 
             {
                 printContent.println("Name: " + c.getCustomer_name() + "\t\t\t" + "P.O. Date: " + d.getDate());
-                printContent.println("Address: " + c.getCustomer_address() + "\t\t\n\n");
+                printContent.println("Address: " + c.getCustomer_address() + "\t\t\t" + "Due date: " + d.getDuedate() + "\n\n");
 
                 printContent.println("Description" + "\t\t" + "Qty" + "\t\t" + "Price" + "\t\t" + "Total" + "\t\t" + "Discount" + "\t\t" + "Total" + "\n");
 
                 for(items obj_items: AlItems)
                 { 
                     printContent.print(obj_items.getItem_name() + "\t\t\t" + obj_items.getQty() + "\t\t" + obj_items.getPrice() + "\t\t" + obj_items.getUndiscountedAmount());
-                    printContent.println( "\t\t" + obj_items.getDiscount() + "\t\t" + obj_items.getTotal_amount());
+                    printContent.println( "\t\t" + obj_items.getDiscount() + "\t\t\t" + obj_items.getTotal_amount());
                 }
 
-                printContent.println("\n\n" + "\t\t\t\t\t\t\t\t\t" + "Qty: " + i.getQty() + "    " + i.getMainTotalAmount());
+                printContent.println("\n\n" + "\t\t\t\t\t\t\t\t\t" + "Qty: " + i.getQty() + "    " + "Total: " + i.getMainTotalAmount());
                 printContent.println("\n" + "I hereby certify that I have received the above mentioned"+  "\n" + "goods in good order an"
                         + "condtion I agree to my obligation on or \nbefore due date (30 days after the date of purchase).");
 
-                printContent.println("\t\t" + c.getCustomer_name());
+                printContent.println("\n\n" + "\t\t\t" + c.getCustomer_name());
                 printContent.println("\t\t(Name & Signature Over Printed Name)");
             }
         
@@ -271,6 +277,4 @@ public class ModelController implements Initializable, compute {
     }
 
     
-
-        
 }
