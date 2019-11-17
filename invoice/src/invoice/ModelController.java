@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -68,6 +69,9 @@ public class ModelController implements Initializable, compute {
     //Arraylists
     private ArrayList<items> AlItems = new ArrayList<>(); 
     
+    //for 2 decimal point on
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+    
     @Override
     public void initialize(URL url, ResourceBundle rep) {
        if(start)
@@ -89,7 +93,7 @@ public class ModelController implements Initializable, compute {
         }
         
         catch(NumberFormatException e){
-            description.setText("Provide data");
+            status_display.setText("Provide data");
         }
         
         i.setUndiscountedAmount(undiscountedAmount(i.getPrice(),  i.getQty())); // get the undisocounted amount
@@ -120,13 +124,13 @@ public class ModelController implements Initializable, compute {
         area.appendText("       ");
         area.appendText(String.valueOf(i.getQty()));
         area.appendText("       ");
-        area.appendText(String.valueOf(i.getPrice()));
+        area.appendText(String.valueOf(df2.format(i.getPrice())));
         area.appendText("       ");
-        area.appendText(String.valueOf(i.getUndiscountedAmount()));
+        area.appendText(String.valueOf(df2.format(i.getUndiscountedAmount())));
         area.appendText("       ");
-        area.appendText(String.valueOf(i.getDiscount()));
+        area.appendText(String.valueOf(df2.format(i.getDiscount())));
         area.appendText("       ");
-        area.appendText(String.valueOf(i.getTotal_amount()));
+        area.appendText(String.valueOf(df2.format(i.getTotal_amount())));
         area.appendText("\n");  
         
         //add the items to the arraylist 
@@ -146,30 +150,35 @@ public class ModelController implements Initializable, compute {
     @FXML
     public void printToTextFile(ActionEvent event) throws IOException
     {
-        for(items obj_items: AlItems)
-        { 
-            out.print(obj_items.getItem_name() + "   " + obj_items.getQty() + "   " + obj_items.getPrice() + "   " + obj_items.getUndiscountedAmount());
-            out.println( "   " + obj_items.getDiscount() + "   " + obj_items.getTotal_amount());
+
+        if(c.getCustomer_name() != null)
+        {
+            try{
+                generateTheFile(); //generates the output file
+                generateOutput(); //prints the content to a text file
+                status_display.setText("Text file is created");
+                
+                AlItems.clear(); // clear arraylist
+                //clear text area and text fields
+                area.clear(); 
+                customer_name.clear();
+                customer_address.clear();
+                po_date.clear();
+                item_count.clear();
+                total_render_amount.clear();
+                customer_signature.clear();
+            }
+
+            catch(Exception e){
+                status_display.clear();
+                status_display.setText("Please add item before saving");
+            }
+            
+        }else{
+            status_display.clear();
+            status_display.setText("Please input the name of the customer");
         }
         
-        try{
-            generateTheFile(); //generates the output file
-            generateOutput(); //prints the content to a text file
-            status_display.setText("Text file is created");
-            AlItems.clear(); // clear arraylist
-            //clear text area and text fields
-            area.clear(); 
-            customer_name.clear();
-            customer_address.clear();
-            po_date.clear();
-            item_count.clear();
-            total_render_amount.clear();
-            customer_signature.clear();
-        }
-        
-        catch(IOException e){
-            out.println("EWWOW");
-        }
     }
     
     //will generate the file output
@@ -178,9 +187,17 @@ public class ModelController implements Initializable, compute {
         File dirFile = new File("d:\\Invoice List");
         if(!dirFile.exists())
             dirFile.mkdir();
-       
-        dirFile = new File(dirFile, fileName);
-        dirFile.createNewFile();
+        
+        try{
+            dirFile = new File(dirFile, fileName);
+            dirFile.createNewFile();
+        }
+        
+        catch(IOException e)
+        {
+            status_display.clear();
+            status_display.setText("Please input the name of the customer");
+        }
         
         out.println("- The file is processed");
         out.println("- The output: " + dirFile.getAbsoluteFile());
@@ -188,32 +205,40 @@ public class ModelController implements Initializable, compute {
     
     public void generateOutput() throws IOException
     {
-        String str_dir = "d:\\Invoice List\\"+ fileName;
-         
-        try (PrintWriter printContent = new PrintWriter(new FileWriter(str_dir, true))) 
+        if(!AlItems.isEmpty()) //if arralylist is not empty print the contents
         {
-            printContent.println("Name: " + c.getCustomer_name() + "\t\t\t" + "P.O. Date: " + d.getDate());
-            printContent.println("Address: " + c.getCustomer_address() + "\t\t\n\n");
-            
-            printContent.println("Description" + "\t\t" + "Qty" + "\t\t" + "Price" + "\t\t" + "Total" + "\t\t" + "Discount" + "\t\t" + "Total" + "\n");
-            
-            for(items obj_items: AlItems)
-            { 
-                printContent.print(obj_items.getItem_name() + "\t\t\t" + obj_items.getQty() + "\t\t" + obj_items.getPrice() + "\t\t" + obj_items.getUndiscountedAmount());
-                printContent.println( "\t\t" + obj_items.getDiscount() + "\t\t" + obj_items.getTotal_amount());
+            String str_dir = "d:\\Invoice List\\"+ fileName; //concatonates the directory the the file name string
+             
+            try (PrintWriter printContent = new PrintWriter(new FileWriter(str_dir, true))) 
+            {
+                printContent.println("Name: " + c.getCustomer_name() + "\t\t\t" + "P.O. Date: " + d.getDate());
+                printContent.println("Address: " + c.getCustomer_address() + "\t\t\n\n");
+
+                printContent.println("Description" + "\t\t" + "Qty" + "\t\t" + "Price" + "\t\t" + "Total" + "\t\t" + "Discount" + "\t\t" + "Total" + "\n");
+
+                for(items obj_items: AlItems)
+                { 
+                    printContent.print(obj_items.getItem_name() + "\t\t\t" + obj_items.getQty() + "\t\t" + obj_items.getPrice() + "\t\t" + obj_items.getUndiscountedAmount());
+                    printContent.println( "\t\t" + obj_items.getDiscount() + "\t\t" + obj_items.getTotal_amount());
+                }
+
+                printContent.println("\n\n" + "\t\t\t\t\t\t\t\t\t" + "Qty: " + i.getQty() + "    " + i.getMainTotalAmount());
+                printContent.println("\n" + "I hereby certify that I have received the above mentioned"+  "\n" + "goods in good order an"
+                        + "condtion I agree to my obligation on or \nbefore due date (30 days after the date of purchase).");
+
+                printContent.println("\t\t" + c.getCustomer_name());
+                printContent.println("\t\t(Name & Signature Over Printed Name)");
+            }
+        
+            catch(Exception e)
+            {
+                out.println("Can't write to the directory created");
             }
             
-            printContent.println("\n\n" + "\t\t\t\t\t\t\t\t\t" + "Qty: " + i.getQty() + "    " + i.getMainTotalAmount());
-            printContent.println("\n" + "I hereby certify that I have received the above mentioned"+  "\n" + "goods in good order an"
-                    + "condtion I agree to my obligation on or \nbefore due date (30 days after the date of purchase).");
-            
-            printContent.println("\t\t" + c.getCustomer_name());
-            printContent.println("\t\t(Name & Signature Over Printed Name)");
-        }
-        
-        catch(IOException e)
-        {
-            out.println("Can't write to the directory created");
+        }else{
+            //else display this erropr message
+            status_display.clear();
+            status_display.setText("Please input the name of the customer");
         }
     } 
     
