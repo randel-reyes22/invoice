@@ -107,12 +107,12 @@
             <Font name="Consolas" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="115.0" layoutY="33.0" text="Status">
+      <Label layoutX="93.0" layoutY="33.0" text="Status">
          <font>
             <Font name="Consolas" size="14.0" />
          </font>
       </Label>
-      <TextArea fx:id="status_display" layoutX="117.0" layoutY="50.0" prefHeight="67.0" prefWidth="247.0" wrapText="true">
+      <TextArea fx:id="status_display" layoutX="95.0" layoutY="50.0" prefHeight="67.0" prefWidth="291.0" wrapText="true">
          <font>
             <Font name="Consolas" size="13.0" />
          </font>
