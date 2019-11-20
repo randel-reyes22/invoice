@@ -10,18 +10,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
 /**
@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  *
  * @author Randel Reyes
  */
-public class ModelController implements Initializable, compute {
+public class ModelController implements Initializable, compute  {
 
     //textfields
     @FXML private TextField description; 
@@ -49,6 +49,7 @@ public class ModelController implements Initializable, compute {
     @FXML private Button btn_Add;
     @FXML private Button close;
     @FXML private Button btn_Save;
+    @FXML private Button btn_Print;
     
     //text area
     @FXML private TextArea area;
@@ -59,7 +60,7 @@ public class ModelController implements Initializable, compute {
     private double TotalAmount;
     private double decimal;
     String fileName;
-    private int increase = 1;
+    String outputDir;
     
     //clasess
     customer c = new customer();
@@ -114,12 +115,12 @@ public class ModelController implements Initializable, compute {
         c.setCustomer_address(customer_address.getText()); // set the customer address
         
         //concatonate the customer name, current date, and the extension .txt
-        fileName = c.getCustomer_name() + "-" + d.getDate()+ ".txt";
-        
+        fileName = c.getCustomer_name() + "-P.O." + d.getDate()+ "Due" + d.getDuedate() + ".txt";
+         
         //sets the content of the textfields
         po_date.setText(d.getDate());
         item_count.setText(String.valueOf(count_item(i.getQty())));
-        total_render_amount.setText(String.valueOf(computeTotalAmount(i.getMainTotalAmount())));
+        total_render_amount.setText(String.valueOf(df2.format(computeTotalAmount(i.getMainTotalAmount()))));
         customer_signature.setText(c.getCustomer_name());
          
         //append to the text area
@@ -161,8 +162,7 @@ public class ModelController implements Initializable, compute {
             try{
                 generateTheFile(); //generates the output file
                 generateOutput(); //prints the content to a text file
-                status_display.setText("Text file is created");
-                
+                status_display.setText(outputDir);
                 AlItems.clear(); // clear arraylist
                 //clear text area and text fields
                 area.clear(); 
@@ -206,12 +206,12 @@ public class ModelController implements Initializable, compute {
         }
         
         out.println("- The file is processed");
-        out.println("- The output: " + dirFile.getAbsoluteFile());
+        outputDir = "- The output: " + dirFile.getAbsoluteFile();
     }
     
     public void generateOutput() throws IOException
     {
-        if(!AlItems.isEmpty()) //if arralylist is not empty print the contents
+        if(!AlItems.isEmpty() || c.getCustomer_name() != null) //if arralylist is not empty print the contents
         {
             String str_dir = "d:\\Invoice List\\"+ fileName; //concatonates the directory the the file name string
              
@@ -228,7 +228,7 @@ public class ModelController implements Initializable, compute {
                     printContent.println( "\t\t" + obj_items.getDiscount() + "\t\t\t" + obj_items.getTotal_amount());
                 }
 
-                printContent.println("\n\n" + "\t\t\t\t\t\t\t\t\t" + "Qty: " + i.getQty() + "    " + "Total: " + i.getMainTotalAmount());
+                printContent.println("\n\n" + "\t\t\t\t\t\t\t\t\t" + "Qty: " + item_count.getText() + "    " + "Total: " + total_render_amount.getText());
                 printContent.println("\n" + "I hereby certify that I have received the above mentioned"+  "\n" + "goods in good order an"
                         + "condtion I agree to my obligation on or \nbefore due date (30 days after the date of purchase).");
 
@@ -242,9 +242,12 @@ public class ModelController implements Initializable, compute {
             }
             
         }else{
-            //else display this erropr message
-            status_display.clear();
-            status_display.setText("Please input the name of the customer");
+            if(c.getCustomer_name() == null){
+                //else display this erropr message
+                status_display.setText("Please add the item to the list");
+            }else{
+                status_display.setText("Please provide a customer name");
+            }
         }
     } 
     
@@ -275,6 +278,5 @@ public class ModelController implements Initializable, compute {
         ctr = ctr +  item;
         return ctr;
     }
-
     
 }
