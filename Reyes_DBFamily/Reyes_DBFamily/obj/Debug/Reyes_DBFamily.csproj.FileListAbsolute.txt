@@ -1,0 +1,13 @@
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\bin\Debug\Reyes_DBFamily.exe.config
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\bin\Debug\Reyes_DBFamily.exe
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\bin\Debug\Reyes_DBFamily.pdb
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.csprojAssemblyReference.cache
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.Form1.resources
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.Properties.Resources.resources
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.csproj.GenerateResource.cache
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.csproj.CoreCompileInputs.cache
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.exe
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.pdb
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\obj\Debug\Reyes_DBFamily.AddFamilyMember.resources
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\bin\Debug\dbFamily.mdf
+E:\2ND YEAR - 2ND SEM\databaseSubject\Reyes_DBFamily\Reyes_DBFamily\bin\Debug\dbFamily_log.ldf
